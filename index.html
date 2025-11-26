@@ -75,22 +75,32 @@ function uploadFile(file) {
     const status = document.getElementById("status");
     status.innerText = "⏳ Качване...";
 
-    const formData = new FormData();
-    formData.append("file", file);  // <-- ИМЕТО ТРЯБВА ДА Е ТОЧНО "file"
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const base64 = e.target.result.split(",")[1];
 
-    fetch(scriptURL, {
-        method: "POST",
-        body: formData
-    })
-    .then(r => r.text())
-    .then(text => {
-        if (text.includes("OK")) status.innerText = "✔ Успешно качено!";
-        else status.innerText = "❌ Грешка: " + text;
-    })
-    .catch(err => {
-        status.innerText = "❌ Грешка при връзката!";
-    });
+        fetch(scriptURL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                filename: file.name,
+                mimeType: file.type,
+                data: base64
+            })
+        })
+        .then(r => r.text())
+        .then(text => {
+            if (text.includes("OK")) status.innerText = "✔ Успешно качено!";
+            else status.innerText = "❌ Грешка: " + text;
+        })
+        .catch(err => {
+            status.innerText = "❌ Грешка при връзката!";
+        });
+    };
+
+    reader.readAsDataURL(file); // base64
 }
+
 
 
 
