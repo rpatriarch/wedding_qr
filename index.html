@@ -72,23 +72,34 @@
 const scriptURL = "https://script.google.com/macros/s/AKfycbwha4sXiaU_THSFRjp66nY50eyngQDXUUdDxO8XPI_lMbS_kDFKEyJUwUNzBPz6CN47/exec";
 
 function uploadFile(file) {
-    const formData = new FormData();
-    formData.append("file", file);
+    const status = document.getElementById("status");
+    status.innerText = "⏳ Качване...";
 
-    document.getElementById("status").innerText = "⏳ Качване...";
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        fetch(scriptURL, {
+            method: "POST",
+            body: e.target.result,
+            headers: {
+                "Content-Type": file.type
+            }
+        })
+        .then(res => res.text())
+        .then(text => {
+            if (text.includes("OK")) {
+                status.innerText = "✔ Успешно качено!";
+            } else {
+                status.innerText = "❌ Грешка: " + text;
+            }
+        })
+        .catch(err => {
+            status.innerText = "❌ Грешка при качване!";
+        });
+    };
 
-    fetch(scriptURL, {
-        method: "POST",
-        body: formData
-    })
-    .then(res => res.text())
-    .then(() => {
-        document.getElementById("status").innerText = "✔ Успешно качено!";
-    })
-    .catch(() => {
-        document.getElementById("status").innerText = "❌ Грешка при качване!";
-    });
+    reader.readAsArrayBuffer(file);
 }
+
 
 document.getElementById("photoInput").addEventListener("change", e => {
     if (e.target.files.length > 0) uploadFile(e.target.files[0]);
