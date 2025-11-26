@@ -1,0 +1,21 @@
+<div class="wedding-container">
+    <div class="initials">И & Р</div>
+    <div class="title">Запечатайте момента</div>
+    <div class="subtitle">Изберете снимка или видео</div>
+
+    <div class="buttons">
+        <button class="btn" onclick="document.getElementById('photoInput').click();">
+            📷 Направи снимка
+        </button>
+
+        <button class="btn" onclick="document.getElementById('videoInput').click();">
+            🎥 Запиши видео
+        </button>
+    </div>
+
+    <!-- Скрити input-и, които отварят камерата -->
+    <input id="photoInput" type="file" accept="image/*" capture="environment" style="display:none">
+    <input id="videoInput" type="file" accept="video/*" capture="user" style="display:none">
+</div>
+
+<script src="script.js"></script>
