@@ -6,11 +6,10 @@ function takeVideo() {
     document.getElementById("videoInput").click();
 }
 
-// Когато е избран файл – просто ще покажем потвърждение
 document.getElementById("photoInput").addEventListener("change", function() {
-    alert("Снимката е заснета! (следваща стъпка: качване)");
+    alert("Снимката е направена! (файлът е в браузъра и може да се качи)");
 });
 
 document.getElementById("videoInput").addEventListener("change", function() {
-    alert("Видеото е записано! (следваща стъпка: качване)");
+    alert("Видеото е записано! (файлът е в браузъра и може да се качи)");
 });
