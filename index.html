@@ -1,29 +1,105 @@
 <!DOCTYPE html>
 <html lang="bg">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>И & Р – Сподели момента</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>И & Р – Снимай момента!</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Arial", sans-serif;
+        background: #4c2a6a;
+        color: white;
+        text-align: center;
+    }
+
+    h1 {
+        margin-top: 40px;
+        font-size: 32px;
+        font-weight: 700;
+    }
+
+    .container {
+        margin-top: 40px;
+    }
+
+    .btn {
+        background: #b47fe1;
+        padding: 18px 32px;
+        border-radius: 12px;
+        margin: 20px;
+        font-size: 22px;
+        color: white;
+        border: none;
+        cursor: pointer;
+        width: 80%;
+        max-width: 300px;
+    }
+
+    #status {
+        margin-top: 30px;
+        font-size: 20px;
+    }
+
+    input {
+        display: none;
+    }
+</style>
 </head>
 
 <body>
-    <div class="wedding-container">
-        <div class="initials">И & Р</div>
-        <div class="title">Сподели момента</div>
-        <div class="subtitle">Направи снимка или видео</div>
 
-        <div class="buttons">
-            <button class="btn" onclick="takePhoto()">📸 Направи снимка</button>
-            <button class="btn" onclick="takeVideo()">🎥 Запиши видео</button>
-        </div>
+<h1>И & Р – Снимай момента!</h1>
 
-        <!-- Скритите input-и за камера -->
-        <input id="photoInput" type="file" accept="image/*" capture="environment" style="display:none">
-        <input id="videoInput" type="file" accept="video/*" capture="user" style="display:none">
-    </div>
+<div class="container">
+    <button class="btn" onclick="document.getElementById('photoInput').click();">
+        📸 Направи снимка
+    </button>
 
-    <script src="script.js"></script>
+    <button class="btn" onclick="document.getElementById('videoInput').click();">
+        🎥 Запиши видео
+    </button>
+</div>
+
+<input id="photoInput" type="file" accept="image/*" capture="environment">
+<input id="videoInput" type="file" accept="video/*" capture="user">
+
+<div id="status"></div>
+
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbz-PQ-E4lgg6yI42P_1Wv8K3zvx4RHxcP0-e29dPtH9aMIDIxcGm81HYsy5p1sk58cU/exec";
+
+function uploadFile(file) {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    document.getElementById("status").innerText = "⏳ Качване...";
+
+    fetch(scriptURL, {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.text())
+    .then(() => {
+        document.getElementById("status").innerText = "✔ Успешно качено!";
+    })
+    .catch(() => {
+        document.getElementById("status").innerText = "❌ Грешка при качване!";
+    });
+}
+
+document.getElementById("photoInput").addEventListener("change", e => {
+    if (e.target.files.length > 0) uploadFile(e.target.files[0]);
+});
+
+document.getElementById("videoInput").addEventListener("change", e => {
+    if (e.target.files.length > 0) uploadFile(e.target.files[0]);
+});
+</script>
+
 </body>
 </html>
+
 
