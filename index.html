@@ -1,21 +1,29 @@
-<div class="wedding-container">
-    <div class="initials">И & Р</div>
-    <div class="title">Запечатайте момента</div>
-    <div class="subtitle">Изберете снимка или видео</div>
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>И & Р – Сподели момента</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
 
-    <div class="buttons">
-        <button class="btn" onclick="document.getElementById('photoInput').click();">
-            📷 Направи снимка
-        </button>
+<body>
+    <div class="wedding-container">
+        <div class="initials">И & Р</div>
+        <div class="title">Сподели момента</div>
+        <div class="subtitle">Направи снимка или видео</div>
 
-        <button class="btn" onclick="document.getElementById('videoInput').click();">
-            🎥 Запиши видео
-        </button>
+        <div class="buttons">
+            <button class="btn" onclick="takePhoto()">📸 Направи снимка</button>
+            <button class="btn" onclick="takeVideo()">🎥 Запиши видео</button>
+        </div>
+
+        <!-- Скритите input-и за камера -->
+        <input id="photoInput" type="file" accept="image/*" capture="environment" style="display:none">
+        <input id="videoInput" type="file" accept="video/*" capture="user" style="display:none">
     </div>
 
-    <!-- Скрити input-и, които отварят камерата -->
-    <input id="photoInput" type="file" accept="image/*" capture="environment" style="display:none">
-    <input id="videoInput" type="file" accept="video/*" capture="user" style="display:none">
-</div>
+    <script src="script.js"></script>
+</body>
+</html>
 
-<script src="script.js"></script>
