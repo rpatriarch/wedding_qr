@@ -1,54 +1,51 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Times New Roman', serif;
-    background: linear-gradient(160deg, #b38bff, #7f5ac2, #4b2a80);
+    background: linear-gradient(180deg, #b57bff, #7a49b7);
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family: "Times New Roman", serif;
     color: white;
+    text-align: center;
 }
 
 .wedding-container {
-    text-align: center;
-    padding: 30px;
+    padding-top: 70px;
 }
 
 .initials {
     font-size: 70px;
     font-weight: bold;
-    letter-spacing: 8px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    letter-spacing: 10px;
 }
 
 .title {
-    font-size: 42px;
+    font-size: 40px;
     font-weight: bold;
-    margin: 15px 0;
+    margin-bottom: 10px;
 }
 
 .subtitle {
     font-size: 22px;
-    margin-bottom: 40px;
-    opacity: 0.9;
+    margin-bottom: 50px;
 }
 
 .buttons .btn {
     display: block;
     background: rgba(255,255,255,0.15);
     border: 2px solid white;
-    padding: 18px 25px;
-    margin: 15px auto;
-    width: 75%;
-    border-radius: 14px;
+    padding: 18px 30px;
+    margin: 20px auto;
+    width: 70%;
+    border-radius: 15px;
     font-size: 22px;
-    color: white;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.25s;
+    color: white;
 }
 
 .buttons .btn:hover {
-    background: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.30);
 }
+
 
