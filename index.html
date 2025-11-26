@@ -75,27 +75,23 @@ function uploadFile(file) {
     const status = document.getElementById("status");
     status.innerText = "⏳ Качване...";
 
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        fetch(scriptURL, {
-            method: "POST",
-            body: e.target.result,
-            headers: {
-                "Content-Type": file.type
-            }
-        })
-        .then(res => res.text())
-        .then(text => {
-            if (text.includes("OK")) {
-                status.innerText = "✔ Успешно качено!";
-            } else {
-                status.innerText = "❌ Грешка: " + text;
-            }
-        })
-        .catch(err => {
-            status.innerText = "❌ Грешка при качване!";
-        });
-    };
+    const formData = new FormData();
+    formData.append("file", file, file.name);
+
+    fetch(scriptURL, {
+        method: "POST",
+        body: formData
+    })
+    .then(r => r.text())
+    .then(text => {
+        if (text.includes("OK")) status.innerText = "✔ Успешно качено!";
+        else status.innerText = "❌ Грешка: " + text;
+    })
+    .catch(err => {
+        status.innerText = "❌ Връзката се провали!";
+    });
+}
+
 
     reader.readAsArrayBuffer(file);
 }
