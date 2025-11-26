@@ -76,7 +76,7 @@ function uploadFile(file) {
     status.innerText = "⏳ Качване...";
 
     const formData = new FormData();
-    formData.append("file", file, file.name);
+    formData.append("file", file);  // <-- ИМЕТО ТРЯБВА ДА Е ТОЧНО "file"
 
     fetch(scriptURL, {
         method: "POST",
@@ -91,6 +91,7 @@ function uploadFile(file) {
         status.innerText = "❌ Грешка при връзката!";
     });
 }
+
 
 
 document.getElementById("photoInput").addEventListener("change", e => {
